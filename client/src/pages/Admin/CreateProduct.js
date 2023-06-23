@@ -15,7 +15,6 @@ const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
 
   //get all category
@@ -136,7 +135,12 @@ const CreateProduct = () => {
                   value={price}
                   placeholder="price"
                   className="form-control"
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    if (value >= 0 || e.target.value === "") {
+                      setPrice(value);
+                    }
+                  }}
                 />
               </div>
               <div className="mb-3">
@@ -145,22 +149,13 @@ const CreateProduct = () => {
                   value={quantity}
                   placeholder="units"
                   className="form-control"
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <Select
-                  bordered={false}
-                  placeholder="select shipping "
-                  size="large"
-                  className="form-select mb-3"
-                  onChange={(value) => {
-                    setShipping(value);
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    if (value > 0 || e.target.value === "") {
+                      setQuantity(value);
+                    }
                   }}
-                >
-                  <Option value="0">no</Option>
-                  <Option value="1">yes</Option>
-                </Select>
+                />
               </div>
               <div className="mb-3">
                 <button

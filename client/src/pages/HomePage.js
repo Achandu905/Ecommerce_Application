@@ -78,11 +78,11 @@ const HomePage = () => {
 
   // filter by cat
   const handleFilter = (value, id) => {
-    let all = [...checked];
+    const all = [...checked];
     if (value) {
       all.push(id);
     } else {
-      all = all.filter((c) => c !== id);
+      all.filter((c) => c !== id);
     }
     setChecked(all);
   };
@@ -108,16 +108,16 @@ const HomePage = () => {
   };
   return (
     <Layout title={"All Products - Best offers "}>
-      {/* banner image */}
-      <img
-        src="/images/banner.png"
-        className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
-      />
-      {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
-        <div className="col-md-3 filters">
+        <div
+          className="col-md-3 filters"
+          style={{
+            position: "fixed",
+            top: "0",
+            height: "90%",
+            width: "20%",
+          }}
+        >
           <h4 className="text-center">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
@@ -149,7 +149,7 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-        <div className="col-md-9 ">
+        <div className="col-md-9 " style={{ marginLeft: "20%" }}>
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
@@ -174,7 +174,7 @@ const HomePage = () => {
                   </p>
                   <div className="card-name-price">
                     <button
-                      className="btn btn-info ms-1"
+                      className="btn btn-dark ms-1"
                       onClick={() => navigate(`/product/${p.slug}`)}
                     >
                       More Details

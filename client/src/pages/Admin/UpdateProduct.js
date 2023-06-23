@@ -16,7 +16,6 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
   const [id, setId] = useState("");
 
@@ -32,7 +31,6 @@ const UpdateProduct = () => {
       setPrice(data.product.price);
       setPrice(data.product.price);
       setQuantity(data.product.quantity);
-      setShipping(data.product.shipping);
       setCategory(data.product.category._id);
     } catch (error) {
       console.log(error);
@@ -91,10 +89,8 @@ const UpdateProduct = () => {
     try {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
       if (!answer) return;
-      const { data } = await axios.delete(
-        `/api/v1/product/delete-product/${id}`
-      );
-      toast.success("Product DEleted Succfully");
+      await axios.delete(`/api/v1/product/delete-product/${id}`);
+      toast.success("Product Deleted Succesfully");
       navigate("/dashboard/admin/products");
     } catch (error) {
       console.log(error);
@@ -105,10 +101,10 @@ const UpdateProduct = () => {
     <Layout title={"Dashboard - Create Product"}>
       <div className="container-fluid m-3 p-3">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 mt-5">
             <AdminMenu />
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 mt-5">
             <h1>Update Product</h1>
             <div className="m-1 w-75">
               <Select
@@ -193,26 +189,10 @@ const UpdateProduct = () => {
                 <input
                   type="number"
                   value={quantity}
-                  placeholder="write a quantity"
+                  placeholder="quantity"
                   className="form-control"
                   onChange={(e) => setQuantity(e.target.value)}
                 />
-              </div>
-              <div className="mb-3">
-                <Select
-                  bordered={false}
-                  placeholder="Select Shipping "
-                  size="large"
-                  showSearch
-                  className="form-select mb-3"
-                  onChange={(value) => {
-                    setShipping(value);
-                  }}
-                  value={shipping ? "yes" : "No"}
-                >
-                  <Option value="0">No</Option>
-                  <Option value="1">Yes</Option>
-                </Select>
               </div>
               <div className="mb-3">
                 <button className="btn btn-primary" onClick={handleUpdate}>

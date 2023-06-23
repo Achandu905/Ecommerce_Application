@@ -84,6 +84,7 @@ const Profile = () => {
                 </div>
                 <div className="mb-3">
                   <input
+                    required="True"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
